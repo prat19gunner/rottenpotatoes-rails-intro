@@ -14,6 +14,8 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     if params[:sort]
       @sort_variable = params[:sort]
+    else
+      @sort_variable = session[:sort]
     end
     if @sort_variable == 'title'
       @movies = @movies.order(@sort_variable)
