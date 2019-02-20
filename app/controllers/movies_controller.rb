@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
+    
     @all_ratings = Movie.ratings
     #Initial setting up of sessions
     session[:ratings] ||= @all_ratings
