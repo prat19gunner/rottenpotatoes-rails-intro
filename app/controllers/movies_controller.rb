@@ -37,10 +37,10 @@ class MoviesController < ApplicationController
        redirect_to movies_path(ratings: Hash[session[:ratings].map {|rating| [rating,rating]}], sort: session[:sort])
     end 
 
-    @ratings = session[:ratings]
-    @sort = session[:sort]
+    @rating_list = session[:ratings]
+    @sort_list = session[:sort]
 
-    @movies = Movie.where(rating: @ratings).order(@sort)
+    @movies = Movie.where(rating: @ratings_list).order(@sort_list)
   end
   
   def new
