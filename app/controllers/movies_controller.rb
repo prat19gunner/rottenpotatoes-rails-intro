@@ -33,7 +33,7 @@ class MoviesController < ApplicationController
      end
 
     #redirecting once the settings are saved as per user's preferences. 
-    redirect_to movies_path(ratings: Hash[session[:ratings].map {|r| [r,r]}], sort: session[:sort]) if  params[:ratings].nil? || params[:sort].nil?
+    redirect_to movies_path(ratings: Hash[session[:ratings].map {|rating| [rating,rating]}], sort: session[:sort]) if  params[:ratings].nil? || params[:sort].nil?
 
     @ratings = session[:ratings]
     @sort = session[:sort]
