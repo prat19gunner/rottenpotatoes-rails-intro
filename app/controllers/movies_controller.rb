@@ -12,10 +12,10 @@ class MoviesController < ApplicationController
   
    def index
 
-    @all_ratings = Movie.ratings
+    @list_ratings = Movie.ratings
 
    
-    session[:ratings] ||= @all_ratings
+    session[:ratings] ||= @list_ratings
     session[:sort] ||= 'id'
 
    if params[:sort] == 'title'
@@ -31,15 +31,13 @@ class MoviesController < ApplicationController
       session[:sort] = params[:sort]
    end
 
-    #redirecting once the settings are saved as per user's preferences. 
+    
     if  params[:ratings].blank? || params[:sort].blank?
        redirect_to movies_path(ratings: Hash[session[:ratings].map {|ratings| [ratings,ratings]}], sort: session[:sort])
     end 
 
     @ratings = session[:ratings]
     @sort = session[:sort]
-    
-    #query
     @movies = Movie.where(rating: @ratings).order(@sort)
 
    end
