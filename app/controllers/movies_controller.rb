@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-
+   
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date)
   end
@@ -9,38 +9,34 @@ class MoviesController < ApplicationController
     @movie = Movie.find(id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
   end
+  
+   def index
 
-  def index
     @all_ratings = Movie.ratings
-    
+
     #Initial setting up of sessions
     session[:ratings] ||= @all_ratings
     session[:sort] ||= 'id'
 
-     if params[:sort] == 'title'
-       @title_sort = session[:title_hilite] = "hilite"
-     end
-     if params[:sort] == 'release_date'
-       @date_sort = session[:date_hilite] = "hilite"
-     end
+    @title_sort = session[:title_hilite] = "hilite" if params[:sort] == 'title'
+    @date_sort = session[:date_hilite] = "hilite" if params[:sort] == 'release_date'
 
     #Remembering the user's preferences
-     if params[:ratings]
-       session[:ratings] = params[:ratings].keys
-     end 
-     if params[:sort]
-      session[:sort] = params[:sort]
-     end
+    session[:ratings] = params[:ratings].keys if params[:ratings]
+    session[:sort] = params[:sort] if params[:sort]
 
     #redirecting once the settings are saved as per user's preferences. 
     redirect_to movies_path(ratings: Hash[session[:ratings].map {|r| [r,r]}], sort: session[:sort]) if  params[:ratings].nil? || params[:sort].nil?
 
-    @rating = session[:ratings]
+    @ratings = session[:ratings]
     @sort = session[:sort]
-
+    
+    #query
     @movies = Movie.where(rating: @ratings).order(@sort)
-  end
+
+   end
   
+
   def new
     # default: render 'new' template
   end
