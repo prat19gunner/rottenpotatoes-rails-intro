@@ -17,8 +17,8 @@ class MoviesController < ApplicationController
     session[:ratings] ||= @all_ratings
     session[:sort] ||= 'id'
 
-    @title_hilite = session[:title_hilite] = "hilite" if params[:sort] == 'title'
-    @date_hilite = session[:date_hilite] = "hilite" if params[:sort] == 'release_date'
+    @title_sort = session[:title_hilite] = "hilite" if params[:sort] == 'title'
+    @date_sort = session[:date_hilite] = "hilite" if params[:sort] == 'release_date'
 
     #Remembering the user's preferences
     session[:ratings] = params[:ratings].keys if params[:ratings]
