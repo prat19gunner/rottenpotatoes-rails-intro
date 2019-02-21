@@ -24,15 +24,12 @@ class MoviesController < ApplicationController
    if params[:sort] == 'release_date'
        @date_sort = session[:date_hilite] = "hilite"
    end 
-
-   
-   
-    if params[:ratings]
+   if params[:ratings]
       session[:ratings] = params[:ratings].keys 
-    end
-    if params[:sort]
+   end
+   if params[:sort]
       session[:sort] = params[:sort]
-    end
+   end
 
     #redirecting once the settings are saved as per user's preferences. 
     if  params[:ratings].blank? || params[:sort].blank?
