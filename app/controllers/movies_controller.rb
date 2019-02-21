@@ -12,10 +12,10 @@ class MoviesController < ApplicationController
   
    def index
 
-    @list_ratings = Movie.ratings
+    @all_ratings = Movie.ratings
 
    
-    session[:ratings] ||= @list_ratings
+    session[:ratings] ||= @all_ratings
     session[:sort] ||= 'id'
 
    if params[:sort] == 'title'
