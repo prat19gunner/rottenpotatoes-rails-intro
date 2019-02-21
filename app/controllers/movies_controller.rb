@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
   
    def index
 
+    
     @all_ratings = Movie.ratings
     session[:ratings] ||= @all_ratings
     session[:sort] ||= 'id'
